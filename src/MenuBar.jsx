@@ -8,15 +8,9 @@ var MenuBar = React.createClass({
 
   render: function () {
     return (
-      <nav className="navbar navbar-default" role="navigation">
-        <div className="container-fluid">
-          <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav">
-              {React.Children.map(this.props.children, this.renderMenuItem)}
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <ul className="menu-bar nav navbar-nav">
+        {React.Children.map(this.props.children, this.renderMenuItem)}
+      </ul>
     );
   },
 
