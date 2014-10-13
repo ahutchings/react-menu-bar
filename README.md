@@ -47,7 +47,7 @@ var MyMenuBar = React.createClass({
   },
 
   onSelect: function (key) {
-    console.log('Selected: %s, key);
+    console.log('Selected: %s', key);
   }
 });
 ```
