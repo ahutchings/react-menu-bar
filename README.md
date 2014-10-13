@@ -2,6 +2,12 @@
 
 Menu bar component for [React][1].
 
+## Installation
+
+```sh
+npm install --save react-menu-bar
+```
+
 ## Usage
 
 ```js
