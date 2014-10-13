@@ -1,7 +1,11 @@
 {
   "name": "react-menu-bar",
   "version": "1.0.0",
-  "description": "",
+  "description": "Menu bar component for React",
+  "keywords": [
+    "react",
+    "react-component"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/ahutchings/react-menu-bar.git"
