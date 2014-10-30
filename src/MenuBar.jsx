@@ -6,7 +6,7 @@ var MenuBar = React.createClass({
     onSelect: React.PropTypes.func.isRequired
   },
 
-  render: function () {
+  render() {
     return (
       <ul className="menu-bar nav navbar-nav">
         {React.Children.map(this.props.children, this.renderMenuItem)}
@@ -14,7 +14,7 @@ var MenuBar = React.createClass({
     );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem(child) {
     return cloneWithProps(child, {
       isTopLevel : true,
       onSelect   : this.props.onSelect

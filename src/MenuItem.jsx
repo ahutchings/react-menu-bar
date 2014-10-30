@@ -7,13 +7,13 @@ var MenuItem = React.createClass({
     onSelect: React.PropTypes.func
   },
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       open: false
     };
   },
 
-  render: function () {
+  render() {
     var classes = {
       'open'             : this.state.open,
       'dropdown-submenu' : !this.props.isTopLevel && this.hasSubmenu()
@@ -30,30 +30,30 @@ var MenuItem = React.createClass({
     );
   },
 
-  getLabel: function () {
+  getLabel() {
     return this.hasSubmenu() ? this.props.label : this.props.children;
   },
 
-  hasSubmenu: function () {
+  hasSubmenu() {
     return React.isValidElement(this.props.children);
   },
 
-  renderSubmenu: function () {
+  renderSubmenu() {
     if (!this.hasSubmenu()) return;
 
-    var menu= this.props.children;
+    var menu = this.props.children;
 
     return cloneWithProps(menu, {
       onSelect: this.onSelect
     });
   },
 
-  onSelect: function (key) {
+  onSelect(key) {
     this.props.onSelect(key);
     this.setDropdownState(false);
   },
 
-  onClick: function (e) {
+  onClick(e) {
     e.preventDefault();
 
     if (this.hasSubmenu()) {
@@ -63,24 +63,24 @@ var MenuItem = React.createClass({
     }
   },
 
-  onMouseOver: function (e) {
+  onMouseOver(e) {
     if (!this.props.isTopLevel && this.hasSubmenu()) {
       this.setDropdownState(true);
     }
   },
 
-  onMouseOut: function (e) {
+  onMouseOut(e) {
     if (!this.props.isTopLevel && this.hasSubmenu()) {
       this.setDropdownState(false);
     }
   },
 
-  toggleOpen: function () {
+  toggleOpen() {
     var open = !this.state.open;
     this.setDropdownState(open);
   },
 
-  setDropdownState: function (open) {
+  setDropdownState(open) {
     if (open) {
       this.bindCloseHandlers();
     } else {
@@ -90,15 +90,15 @@ var MenuItem = React.createClass({
     this.setState({open: open});
   },
 
-  bindCloseHandlers: function () {
+  bindCloseHandlers() {
     document.addEventListener('click', this.handleDocumentClick, false);
   },
 
-  unbindCloseHandlers: function () {
+  unbindCloseHandlers() {
     document.removeEventListener('click', this.handleDocumentClick);
   },
 
-  handleDocumentClick: function (e) {
+  handleDocumentClick(e) {
     if (this.getDOMNode().contains(e.target)) {
       return;
     }
@@ -106,7 +106,7 @@ var MenuItem = React.createClass({
     this.setDropdownState(false);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     this.unbindCloseHandlers();
   }
 });

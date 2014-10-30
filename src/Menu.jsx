@@ -6,7 +6,7 @@ var Menu = React.createClass({
     onSelect: React.PropTypes.func.isRequired
   },
 
-  render: function () {
+  render() {
     return (
       <ul className="dropdown-menu" role="menu">
         {React.Children.map(this.props.children, this.renderChild)}
@@ -14,7 +14,7 @@ var Menu = React.createClass({
     );
   },
 
-  renderChild: function (child) {
+  renderChild(child) {
     return cloneWithProps(child, {
       onSelect: this.props.onSelect
     });
