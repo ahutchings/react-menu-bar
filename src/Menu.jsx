@@ -9,19 +9,15 @@ var Menu = React.createClass({
   render: function () {
     return (
       <ul className="dropdown-menu" role="menu">
-        {React.Children.map(this.props.children, this.renderMenuItem)}
+        {React.Children.map(this.props.children, this.renderChild)}
       </ul>
     );
   },
 
-  renderMenuItem: function (child) {
-    return cloneWithProps(
-      child,
-      {
-        onSelect: this.props.onSelect,
-        key: child.props.key
-      }
-    );
+  renderChild: function (child) {
+    return cloneWithProps(child, {
+      onSelect: this.props.onSelect
+    });
   }
 });
 

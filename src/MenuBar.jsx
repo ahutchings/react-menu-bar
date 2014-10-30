@@ -15,13 +15,10 @@ var MenuBar = React.createClass({
   },
 
   renderMenuItem: function (child) {
-    return cloneWithProps(
-      child,
-      {
-        isTopLevel: true,
-        onSelect: this.props.onSelect
-      }
-    );
+    return cloneWithProps(child, {
+      isTopLevel : true,
+      onSelect   : this.props.onSelect
+    });
   }
 });
 

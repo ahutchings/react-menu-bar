@@ -18,12 +18,12 @@
     "extend": "^2.0.0",
     "gulp": "^3.8.8",
     "gulp-util": "^3.0.1",
-    "reactify": "^0.14.0",
+    "reactify": "^0.14.1",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.0.0"
   },
   "dependencies": {
-    "react": "^0.11.2"
+    "react": "^0.12.0"
   },
   "browserify": {
     "transform": [

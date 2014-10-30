@@ -8,6 +8,7 @@ var extend     = require('extend')
 
 gulp.task('sync', ['scripts'], function () {
   sync.init(null, {
+    port: process.env.PORT || 3000,
     server: {
       baseDir: './example'
     }
@@ -27,7 +28,7 @@ gulp.task('scripts', function () {
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('index.js'))
       .pipe(gulp.dest('./example'))
-      .pipe(sync.reload({stream:true, once: true}));
+      .pipe(sync.reload({stream: true, once: true}));
   }
 
   return rebundle();

@@ -15,30 +15,37 @@ var MenuItem = React.createClass({
 
   render: function () {
     var classes = {
-      'open': this.state.open,
-      'dropdown-submenu': !this.props.isTopLevel && !!this.props.children
+      'open'             : this.state.open,
+      'dropdown-submenu' : !this.props.isTopLevel && this.hasSubmenu()
     };
 
     return (
       <li className={classSet(classes)} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
         <a href="#" onClick={this.onClick}>
-          {this.props.label}
+          {this.getLabel()}
         </a>
 
-        {this.renderMenu()}
+        {this.renderSubmenu()}
       </li>
     );
   },
 
-  renderMenu: function () {
-    if (this.props.children) {
-      return cloneWithProps(
-        this.props.children,
-        {
-          onSelect: this.onSelect
-        }
-      );
-    }
+  getLabel: function () {
+    return this.hasSubmenu() ? this.props.label : this.props.children;
+  },
+
+  hasSubmenu: function () {
+    return React.isValidElement(this.props.children);
+  },
+
+  renderSubmenu: function () {
+    if (!this.hasSubmenu()) return;
+
+    var menu= this.props.children;
+
+    return cloneWithProps(menu, {
+      onSelect: this.onSelect
+    });
   },
 
   onSelect: function (key) {
@@ -49,21 +56,21 @@ var MenuItem = React.createClass({
   onClick: function (e) {
     e.preventDefault();
 
-    if (this.props.children) {
+    if (this.hasSubmenu()) {
       this.toggleOpen();
     } else {
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this.props.command);
     }
   },
 
   onMouseOver: function (e) {
-    if (!this.props.isTopLevel && this.props.children) {
+    if (!this.props.isTopLevel && this.hasSubmenu()) {
       this.setDropdownState(true);
     }
   },
 
   onMouseOut: function (e) {
-    if (!this.props.isTopLevel && this.props.children) {
+    if (!this.props.isTopLevel && this.hasSubmenu()) {
       this.setDropdownState(false);
     }
   },
