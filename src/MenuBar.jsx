@@ -6,9 +6,25 @@ var MenuBar = React.createClass({
     onSelect: React.PropTypes.func.isRequired
   },
 
+  getInitialState() {
+    return {
+      isActive: false
+    };
+  },
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isActive && !prevState.isActive) {
+      this.bindSetInactiveHandler()
+    }
+
+    if (prevState.isActive && !this.state.isActive) {
+      this.unbindSetInactiveHandler()
+    }
+  },
+
   render() {
     return (
-      <ul className="menu-bar nav navbar-nav">
+      <ul className="menu-bar nav navbar-nav" onClick={this.onClick}>
         {React.Children.map(this.props.children, this.renderMenuItem)}
       </ul>
     );
@@ -16,8 +32,32 @@ var MenuBar = React.createClass({
 
   renderMenuItem(child) {
     return cloneWithProps(child, {
-      isTopLevel : true,
-      onSelect   : this.props.onSelect
+      isMenuBarActive     : this.state.isActive,
+      isMenuBarDescendant : this.isMenuBarDescendant,
+      isTopLevel          : true,
+      onSelect            : this.props.onSelect
+    });
+  },
+
+  isMenuBarDescendant(element) {
+    return this.getDOMNode().contains(element);
+  },
+
+  bindSetInactiveHandler() {
+    document.addEventListener('click', this.handleDocumentClick, false);
+  },
+
+  unbindSetInactiveHandler() {
+    document.removeEventListener('click', this.handleDocumentClick);
+  },
+
+  handleDocumentClick(e) {
+    this.setState({isActive: false});
+  },
+
+  onClick(e) {
+    this.setState({
+      isActive: !this.state.isActive
     });
   }
 });

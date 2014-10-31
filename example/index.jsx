@@ -1,8 +1,5 @@
-var React     = require('react');
-var MenuBar   = require('../').MenuBar;
-var Menu      = require('../').Menu;
-var MenuItem  = require('../').MenuItem;
-var Separator = require('../').Separator;
+var React = require('react');
+var {MenuBar, Menu, MenuItem, Separator} = require('../');
 
 function onSelect (command) {
   console.log('Selected command: %s', command);
