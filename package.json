@@ -1,6 +1,6 @@
 {
   "name": "react-menu-bar",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Menu bar component for React",
   "keywords": [
     "react",
@@ -27,7 +27,12 @@
   },
   "browserify": {
     "transform": [
-      ["reactify", {"es6": true}]
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
     ]
   }
 }
