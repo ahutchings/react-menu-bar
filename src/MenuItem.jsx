@@ -5,6 +5,7 @@ var cloneWithProps = React.addons.cloneWithProps;
 var MenuItem = React.createClass({
   propTypes: {
     isMenuBarDescendant : React.PropTypes.func.isRequired,
+    menuBarEvents       : React.PropTypes.object.isRequired,
     onSelect            : React.PropTypes.func
   },
 
@@ -12,6 +13,10 @@ var MenuItem = React.createClass({
     return {
       open: false
     };
+  },
+
+  componentWillUnmount() {
+    this.unbindCloseHandlers();
   },
 
   render() {
@@ -46,6 +51,7 @@ var MenuItem = React.createClass({
 
     return cloneWithProps(menu, {
       isMenuBarDescendant : this.props.isMenuBarDescendant,
+      menuBarEvents       : this.props.menuBarEvents,
       onSelect            : this.onSelect
     });
   },
@@ -101,24 +107,28 @@ var MenuItem = React.createClass({
   },
 
   bindCloseHandlers() {
-    document.addEventListener('click', this.handleDocumentClick, false);
+    document.addEventListener('click', this.onDocumentClick, false);
+    this.props.menuBarEvents.addMouseOverListener(this.onMenuBarMouseOver);
   },
 
   unbindCloseHandlers() {
-    document.removeEventListener('click', this.handleDocumentClick);
+    document.removeEventListener('click', this.onDocumentClick);
+    this.props.menuBarEvents.removeMouseOverListener(this.onMenuBarMouseOver);
   },
 
-  handleDocumentClick(e) {
+  onDocumentClick(e) {
     if (this.isChildElement(e.target)) return;
     this.setDropdownState(false);
   },
 
-  isChildElement(element) {
-    return this.getDOMNode().contains(element);
+  onMenuBarMouseOver(e) {
+    if (this.state.open && !this.isChildElement(e.target)) {
+      this.setDropdownState(false);
+    }
   },
 
-  componentWillUnmount() {
-    this.unbindCloseHandlers();
+  isChildElement(element) {
+    return this.getDOMNode().contains(element);
   }
 });
 

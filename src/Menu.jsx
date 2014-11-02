@@ -4,6 +4,7 @@ var cloneWithProps = React.addons.cloneWithProps;
 var Menu = React.createClass({
   propTypes: {
     isMenuBarDescendant : React.PropTypes.func.isRequired,
+    menuBarEvents       : React.PropTypes.object.isRequired,
     onSelect            : React.PropTypes.func.isRequired
   },
 
@@ -18,6 +19,7 @@ var Menu = React.createClass({
   renderChild(child) {
     return cloneWithProps(child, {
       isMenuBarDescendant : this.props.isMenuBarDescendant,
+      menuBarEvents       : this.props.menuBarEvents,
       onSelect            : this.props.onSelect
     });
   }

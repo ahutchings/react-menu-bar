@@ -1,4 +1,5 @@
 var React          = require('react/addons');
+var MenuBarEvents  = require('./MenuBarEvents');
 var cloneWithProps = React.addons.cloneWithProps;
 
 var MenuBar = React.createClass({
@@ -10,6 +11,12 @@ var MenuBar = React.createClass({
     return {
       isActive: false
     };
+  },
+
+  componentWillMount() {
+    this.setState({
+      events: new MenuBarEvents()
+    });
   },
 
   componentDidUpdate(prevProps, prevState) {
@@ -24,7 +31,7 @@ var MenuBar = React.createClass({
 
   render() {
     return (
-      <ul className="menu-bar nav navbar-nav" onClick={this.onClick}>
+      <ul className="menu-bar nav navbar-nav" onClick={this.onClick} onMouseOver={this.onMouseOver}>
         {React.Children.map(this.props.children, this.renderMenuItem)}
       </ul>
     );
@@ -35,6 +42,7 @@ var MenuBar = React.createClass({
       isMenuBarActive     : this.state.isActive,
       isMenuBarDescendant : this.isMenuBarDescendant,
       isTopLevel          : true,
+      menuBarEvents       : this.state.events,
       onSelect            : this.props.onSelect
     });
   },
@@ -59,6 +67,10 @@ var MenuBar = React.createClass({
     this.setState({
       isActive: !this.state.isActive
     });
+  },
+
+  onMouseOver(e) {
+    this.state.events.emitMouseOver(e);
   }
 });
 
