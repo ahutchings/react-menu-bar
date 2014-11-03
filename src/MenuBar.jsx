@@ -24,7 +24,7 @@ var MenuBar = React.createClass({
       this.bindSetInactiveHandler()
     }
 
-    if (prevState.isActive && !this.state.isActive) {
+    else if (prevState.isActive && !this.state.isActive) {
       this.unbindSetInactiveHandler()
     }
   },
@@ -64,9 +64,7 @@ var MenuBar = React.createClass({
   },
 
   onClick(e) {
-    this.setState({
-      isActive: !this.state.isActive
-    });
+    this.setState({isActive: !this.state.isActive});
   },
 
   onMouseOver(e) {

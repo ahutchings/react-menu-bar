@@ -4,6 +4,7 @@ var cloneWithProps = React.addons.cloneWithProps;
 
 var MenuItem = React.createClass({
   propTypes: {
+    isMenuBarActive     : React.PropTypes.bool,
     isMenuBarDescendant : React.PropTypes.func.isRequired,
     menuBarEvents       : React.PropTypes.object.isRequired,
     onSelect            : React.PropTypes.func
@@ -13,6 +14,16 @@ var MenuItem = React.createClass({
     return {
       open: false
     };
+  },
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.open && !prevState.open) {
+      this.bindCloseHandlers()
+    }
+
+    else if (prevState.open && !this.state.open) {
+      this.unbindCloseHandlers()
+    }
   },
 
   componentWillUnmount() {
@@ -58,7 +69,7 @@ var MenuItem = React.createClass({
 
   onSelect(key) {
     this.props.onSelect(key);
-    this.setDropdownState(false);
+    this.setState({open: false});
   },
 
   onClick(e) {
@@ -73,11 +84,11 @@ var MenuItem = React.createClass({
 
   onMouseOver(e) {
     if (this.props.isTopLevel && this.props.isMenuBarActive) {
-      this.setDropdownState(true);
+      this.setState({open: true});
     }
 
     if (!this.props.isTopLevel && this.hasSubmenu()) {
-      this.setDropdownState(true);
+      this.setState({open: true});
     }
   },
 
@@ -87,23 +98,12 @@ var MenuItem = React.createClass({
       this.props.isMenuBarDescendant(e.relatedTarget) &&
       !this.isChildElement(e.relatedTarget)
     ) {
-      this.setDropdownState(false);
+      this.setState({open: false});
     }
   },
 
   toggleOpen() {
-    var open = !this.state.open;
-    this.setDropdownState(open);
-  },
-
-  setDropdownState(open) {
-    if (open) {
-      this.bindCloseHandlers();
-    } else {
-      this.unbindCloseHandlers();
-    }
-
-    this.setState({open: open});
+    this.setState({open: !this.state.open});
   },
 
   bindCloseHandlers() {
@@ -117,13 +117,14 @@ var MenuItem = React.createClass({
   },
 
   onDocumentClick(e) {
-    if (this.isChildElement(e.target)) return;
-    this.setDropdownState(false);
+    if (!this.isChildElement(e.target)) {
+      this.setState({open: false});
+    }
   },
 
   onMenuBarMouseOver(e) {
-    if (this.state.open && !this.isChildElement(e.target)) {
-      this.setDropdownState(false);
+    if (!this.isChildElement(e.target)) {
+      this.setState({open: false});
     }
   },
 
