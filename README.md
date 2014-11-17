@@ -1,6 +1,6 @@
 # react-menu-bar [![npm](http://img.shields.io/npm/v/react-menu-bar.svg)](https://www.npmjs.org/package/react-menu-bar)
 
-Menu bar component for [React][https://facebook.github.io/react/].
+Menu bar component for [React](https://facebook.github.io/react/).
 
 ## Installation
 
