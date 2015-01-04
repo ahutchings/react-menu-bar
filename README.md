@@ -1,6 +1,6 @@
-# react-menu-bar
+# react-menu-bar [![npm](http://img.shields.io/npm/v/react-menu-bar.svg)](https://www.npmjs.org/package/react-menu-bar)
 
-Menu bar component for [React][1].
+Menu bar component for [React](https://facebook.github.io/react/).
 
 ## Installation
 
@@ -57,5 +57,3 @@ var MyMenuBar = React.createClass({
   }
 });
 ```
-
-[1]: https://facebook.github.io/react/

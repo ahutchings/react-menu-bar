@@ -4,7 +4,7 @@ var source     = require('vinyl-source-stream');
 var watchify   = require('watchify');
 var browserify = require('browserify');
 var sync       = require('browser-sync');
-var extend     = require('extend')
+var extend     = require('extend');
 
 gulp.task('sync', ['scripts'], function () {
   sync.init(null, {
@@ -32,6 +32,18 @@ gulp.task('scripts', function () {
   }
 
   return rebundle();
+});
+
+gulp.task('build', function () {
+  var options = extend({}, {debug: false}, {fullPaths: false});
+  var bundler = browserify('./example/index.jsx', options);
+
+  bundler.transform('reactify');
+
+  return bundler.bundle()
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('index.js'))
+    .pipe(gulp.dest('./example'));
 });
 
 gulp.task('default', ['sync']);
