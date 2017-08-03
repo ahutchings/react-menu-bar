@@ -1,5 +1,7 @@
 # react-menu-bar
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ahutchings/react-menu-bar.svg)](https://greenkeeper.io/)
+
 Menu bar component for [React][1].
 
 ## Installation
