@@ -13,17 +13,17 @@
   "author": "Andrew Hutchings <andrew.hutchings@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "reactify": "^0.15.1"
+    "reactify": "^1.1.1"
   },
   "devDependencies": {
-    "browser-sync": "^1.5.7",
-    "browserify": "^6.0.3",
-    "extend": "^2.0.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
+    "extend": "^3.0.1",
     "gulp": "^3.8.8",
     "gulp-util": "^3.0.1",
-    "react": "^0.12.2",
+    "react": "^15.6.1",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.0.0"
+    "watchify": "^3.9.0"
   },
   "peerDependencies": {
     "react": "*"
